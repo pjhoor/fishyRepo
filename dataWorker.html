@@ -1,0 +1,983 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="./" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>&lt;no title&gt; &#8212; Jupyter Book Template</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="_static/styles/theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="_static/styles/bootstrap.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+<link href="_static/styles/pydata-sphinx-theme.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+
+  
+  <link href="_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=3ee479438cf8b5e0d341" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/sphinx-book-theme.css?v=384b581d" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-design.min.css?v=87e54e7c" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
+<link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341" />
+  <script src="_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=3ee479438cf8b5e0d341"></script>
+
+    <script src="_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/scripts/sphinx-book-theme.js?v=efea14e4"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="_static/togglebutton.js?v=4a39c7ea"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="_static/design-tabs.js?v=36754332"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'dataWorker';</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+
+<a class="navbar-brand logo" href="docs/home.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">Jupyter Book Template</p>
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="docs/home.html">
+                    Jupyter Book Tutorial
+                </a>
+            </li>
+        </ul>
+        <ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="docs/notebook.html">Example Notebook</a></li>
+<li class="toctree-l1"><a class="reference internal" href="docs/story.html">Story</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><label class="sidebar-toggle primary-toggle btn btn-sm" for="__primary" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</label></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://colab.research.google.com/github/yenchiah/jupyter-book-template/blob/main/docs/dataWorker.ipynb" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch onColab"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img src="_static/images/logo_colab.png">
+  </span>
+<span class="btn__text-container">Colab</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-source-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Source repositories">
+    <i class="fab fa-github"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://github.com/yenchiah/jupyter-book-template" target="_blank"
+   class="btn btn-sm btn-source-repository-button dropdown-item"
+   title="Source repository"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="btn__text-container">Repository</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li><a href="https://github.com/yenchiah/jupyter-book-template/issues/new?title=Issue%20on%20page%20%2FdataWorker.html&body=Your%20issue%20content%20here." target="_blank"
+   class="btn btn-sm btn-source-issues-button dropdown-item"
+   title="Open an issue"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="btn__text-container">Open issue</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="_sources/dataWorker.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<label class="sidebar-toggle secondary-toggle btn btn-sm" for="__secondary"title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</label>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1><no title></h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">### Initialization</span>
+
+<span class="c1"># Import the pandas library</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># Read the .csv file into a pandas DataFrame</span>
+<span class="n">Emissions</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/totalEmissionsPerCountry2000-2020.csv&#39;</span><span class="p">)</span>
+<span class="n">Energy</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/globalDataOnSustainableEnergy2000-2020.csv&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># pandas.DataFrame.head(n=5) for the Emissions dataset</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Emissions</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>          Area           Item                           Element        Unit  \
+0  Afghanistan  Crop Residues            Direct emissions (N2O)  kilotonnes   
+1  Afghanistan  Crop Residues          Indirect emissions (N2O)  kilotonnes   
+2  Afghanistan  Crop Residues                   Emissions (N2O)  kilotonnes   
+3  Afghanistan  Crop Residues  Emissions (CO2eq) from N2O (AR5)  kilotonnes   
+4  Afghanistan  Crop Residues           Emissions (CO2eq) (AR5)  kilotonnes   
+
+      2000      2001      2002      2003      2004      2005  ...      2011  \
+0    0.520    0.5267    0.8200    0.9988    0.8225    1.1821  ...    1.0321   
+1    0.117    0.1185    0.1845    0.2247    0.1851    0.2660  ...    0.2322   
+2    0.637    0.6452    1.0045    1.2235    1.0075    1.4481  ...    1.2643   
+3  168.807  170.9884  266.1975  324.2195  266.9995  383.7498  ...  335.0379   
+4  168.807  170.9884  266.1975  324.2195  266.9995  383.7498  ...  335.0379   
+
+       2012      2013      2014      2015      2016      2017      2018  \
+0    1.3726    1.4018    1.4584    1.2424    1.1940    1.0617    0.8988   
+1    0.3088    0.3154    0.3281    0.2795    0.2687    0.2389    0.2022   
+2    1.6815    1.7173    1.7865    1.5220    1.4627    1.3005    1.1011   
+3  445.5958  455.0727  473.4174  403.3181  387.6130  344.6447  291.7838   
+4  445.5958  455.0727  473.4174  403.3181  387.6130  344.6447  291.7838   
+
+       2019      2020  
+0    1.2176    1.3170  
+1    0.2740    0.2963  
+2    1.4916    1.6133  
+3  395.2689  427.5284  
+4  395.2689  427.5284  
+
+[5 rows x 25 columns]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># pandas.DataFrame.head(n=5) for the Energy dataset</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Energy</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>        Entity  Year  Access to electricity (% of population)  \
+0  Afghanistan  2000                                 1.613591   
+1  Afghanistan  2001                                 4.074574   
+2  Afghanistan  2002                                 9.409158   
+3  Afghanistan  2003                                14.738506   
+4  Afghanistan  2004                                20.064968   
+
+   Access to clean fuels for cooking  \
+0                                6.2   
+1                                7.2   
+2                                8.2   
+3                                9.5   
+4                               10.9   
+
+   Renewable-electricity-generating-capacity-per-capita  \
+0                                               9.22      
+1                                               8.86      
+2                                               8.47      
+3                                               8.09      
+4                                               7.75      
+
+   Financial flows to developing countries (US $)  \
+0                                         20000.0   
+1                                        130000.0   
+2                                       3950000.0   
+3                                      25970000.0   
+4                                             NaN   
+
+   Renewable energy share in the total final energy consumption (%)  \
+0                                              44.99                  
+1                                              45.60                  
+2                                              37.83                  
+3                                              36.66                  
+4                                              44.24                  
+
+   Electricity from fossil fuels (TWh)  Electricity from nuclear (TWh)  \
+0                                 0.16                             0.0   
+1                                 0.09                             0.0   
+2                                 0.13                             0.0   
+3                                 0.31                             0.0   
+4                                 0.33                             0.0   
+
+   Electricity from renewables (TWh)  ...  \
+0                               0.31  ...   
+1                               0.50  ...   
+2                               0.56  ...   
+3                               0.63  ...   
+4                               0.56  ...   
+
+   Primary energy consumption per capita (kWh/person)  \
+0                                          302.59482    
+1                                          236.89185    
+2                                          210.86215    
+3                                          229.96822    
+4                                          204.23125    
+
+   Energy intensity level of primary energy (MJ/$2017 PPP GDP)  \
+0                                               1.64             
+1                                               1.74             
+2                                               1.40             
+3                                               1.40             
+4                                               1.20             
+
+   Value_co2_emissions_kt_by_country  \
+0                         760.000000   
+1                         730.000000   
+2                        1029.999971   
+3                        1220.000029   
+4                        1029.999971   
+
+   Renewables (% equivalent primary energy)  gdp_growth  gdp_per_capita  \
+0                                       NaN         NaN             NaN   
+1                                       NaN         NaN             NaN   
+2                                       NaN         NaN      179.426579   
+3                                       NaN    8.832278      190.683814   
+4                                       NaN    1.414118      211.382074   
+
+   Density\n(P/Km2) Land Area(Km2)  Latitude  Longitude  
+0                60       652230.0  33.93911  67.709953  
+1                60       652230.0  33.93911  67.709953  
+2                60       652230.0  33.93911  67.709953  
+3                60       652230.0  33.93911  67.709953  
+4                60       652230.0  33.93911  67.709953  
+
+[5 rows x 21 columns]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">print_unique_values</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">unique_values</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">unique_values</span><span class="p">:</span>
+        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">result</span>
+<span class="n">print_unique_values</span><span class="p">(</span><span class="n">Emissions</span><span class="p">,</span> <span class="s1">&#39;Area&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;Afghanistan&#39;,
+ &#39;Albania&#39;,
+ &#39;Algeria&#39;,
+ &#39;American Samoa&#39;,
+ &#39;Andorra&#39;,
+ &#39;Angola&#39;,
+ &#39;Anguilla&#39;,
+ &#39;Antigua and Barbuda&#39;,
+ &#39;Argentina&#39;,
+ &#39;Armenia&#39;,
+ &#39;Aruba&#39;,
+ &#39;Australia&#39;,
+ &#39;Austria&#39;,
+ &#39;Azerbaijan&#39;,
+ &#39;Bahamas&#39;,
+ &#39;Bahrain&#39;,
+ &#39;Bangladesh&#39;,
+ &#39;Barbados&#39;,
+ &#39;Belarus&#39;,
+ &#39;Belgium&#39;,
+ &#39;Belgium-Luxembourg&#39;,
+ &#39;Belize&#39;,
+ &#39;Benin&#39;,
+ &#39;Bermuda&#39;,
+ &#39;Bhutan&#39;,
+ &#39;Bolivia (Plurinational State of)&#39;,
+ &#39;Bosnia and Herzegovina&#39;,
+ &#39;Botswana&#39;,
+ &#39;Brazil&#39;,
+ &#39;British Virgin Islands&#39;,
+ &#39;Brunei Darussalam&#39;,
+ &#39;Bulgaria&#39;,
+ &#39;Burkina Faso&#39;,
+ &#39;Burundi&#39;,
+ &#39;Cabo Verde&#39;,
+ &#39;Cambodia&#39;,
+ &#39;Cameroon&#39;,
+ &#39;Canada&#39;,
+ &#39;Cayman Islands&#39;,
+ &#39;Central African Republic&#39;,
+ &#39;Chad&#39;,
+ &#39;Channel Islands&#39;,
+ &#39;Chile&#39;,
+ &#39;China&#39;,
+ &#39;China, Hong Kong SAR&#39;,
+ &#39;China, Macao SAR&#39;,
+ &#39;China, mainland&#39;,
+ &#39;China, Taiwan Province of&#39;,
+ &#39;Colombia&#39;,
+ &#39;Comoros&#39;,
+ &#39;Congo&#39;,
+ &#39;Cook Islands&#39;,
+ &#39;Costa Rica&#39;,
+ &quot;C?e d&#39;Ivoire&quot;,
+ &#39;Croatia&#39;,
+ &#39;Cuba&#39;,
+ &#39;Cyprus&#39;,
+ &#39;Czechia&#39;,
+ &#39;Czechoslovakia&#39;,
+ &quot;Democratic People&#39;s Republic of Korea&quot;,
+ &#39;Democratic Republic of the Congo&#39;,
+ &#39;Denmark&#39;,
+ &#39;Djibouti&#39;,
+ &#39;Dominica&#39;,
+ &#39;Dominican Republic&#39;,
+ &#39;Ecuador&#39;,
+ &#39;Egypt&#39;,
+ &#39;El Salvador&#39;,
+ &#39;Equatorial Guinea&#39;,
+ &#39;Eritrea&#39;,
+ &#39;Estonia&#39;,
+ &#39;Eswatini&#39;,
+ &#39;Ethiopia&#39;,
+ &#39;Ethiopia PDR&#39;,
+ &#39;Falkland Islands (Malvinas)&#39;,
+ &#39;Faroe Islands&#39;,
+ &#39;Fiji&#39;,
+ &#39;Finland&#39;,
+ &#39;France&#39;,
+ &#39;French Guyana&#39;,
+ &#39;French Polynesia&#39;,
+ &#39;Gabon&#39;,
+ &#39;Gambia&#39;,
+ &#39;Georgia&#39;,
+ &#39;Germany&#39;,
+ &#39;Ghana&#39;,
+ &#39;Gibraltar&#39;,
+ &#39;Greece&#39;,
+ &#39;Greenland&#39;,
+ &#39;Grenada&#39;,
+ &#39;Guadeloupe&#39;,
+ &#39;Guam&#39;,
+ &#39;Guatemala&#39;,
+ &#39;Guinea&#39;,
+ &#39;Guinea-Bissau&#39;,
+ &#39;Guyana&#39;,
+ &#39;Haiti&#39;,
+ &#39;Holy See&#39;,
+ &#39;Honduras&#39;,
+ &#39;Hungary&#39;,
+ &#39;Iceland&#39;,
+ &#39;India&#39;,
+ &#39;Indonesia&#39;,
+ &#39;Iran (Islamic Republic of)&#39;,
+ &#39;Iraq&#39;,
+ &#39;Ireland&#39;,
+ &#39;Isle of Man&#39;,
+ &#39;Israel&#39;,
+ &#39;Italy&#39;,
+ &#39;Jamaica&#39;,
+ &#39;Japan&#39;,
+ &#39;Jordan&#39;,
+ &#39;Kazakhstan&#39;,
+ &#39;Kenya&#39;,
+ &#39;Kiribati&#39;,
+ &#39;Kuwait&#39;,
+ &#39;Kyrgyzstan&#39;,
+ &quot;Lao People&#39;s Democratic Republic&quot;,
+ &#39;Latvia&#39;,
+ &#39;Lebanon&#39;,
+ &#39;Lesotho&#39;,
+ &#39;Liberia&#39;,
+ &#39;Libya&#39;,
+ &#39;Liechtenstein&#39;,
+ &#39;Lithuania&#39;,
+ &#39;Luxembourg&#39;,
+ &#39;Madagascar&#39;,
+ &#39;Malawi&#39;,
+ &#39;Malaysia&#39;,
+ &#39;Maldives&#39;,
+ &#39;Mali&#39;,
+ &#39;Malta&#39;,
+ &#39;Marshall Islands&#39;,
+ &#39;Martinique&#39;,
+ &#39;Mauritania&#39;,
+ &#39;Mauritius&#39;,
+ &#39;Mayotte&#39;,
+ &#39;Mexico&#39;,
+ &#39;Micronesia (Federated States of)&#39;,
+ &#39;Monaco&#39;,
+ &#39;Mongolia&#39;,
+ &#39;Montenegro&#39;,
+ &#39;Montserrat&#39;,
+ &#39;Morocco&#39;,
+ &#39;Mozambique&#39;,
+ &#39;Myanmar&#39;,
+ &#39;Namibia&#39;,
+ &#39;Nauru&#39;,
+ &#39;Nepal&#39;,
+ &#39;Netherlands&#39;,
+ &#39;Netherlands Antilles (former)&#39;,
+ &#39;New Caledonia&#39;,
+ &#39;New Zealand&#39;,
+ &#39;Nicaragua&#39;,
+ &#39;Niger&#39;,
+ &#39;Nigeria&#39;,
+ &#39;Niue&#39;,
+ &#39;Norfolk Island&#39;,
+ &#39;North Macedonia&#39;,
+ &#39;Northern Mariana Islands&#39;,
+ &#39;Norway&#39;,
+ &#39;Oman&#39;,
+ &#39;Pacific Islands Trust Territory&#39;,
+ &#39;Pakistan&#39;,
+ &#39;Palau&#39;,
+ &#39;Palestine&#39;,
+ &#39;Panama&#39;,
+ &#39;Papua New Guinea&#39;,
+ &#39;Paraguay&#39;,
+ &#39;Peru&#39;,
+ &#39;Philippines&#39;,
+ &#39;Pitcairn&#39;,
+ &#39;Poland&#39;,
+ &#39;Portugal&#39;,
+ &#39;Puerto Rico&#39;,
+ &#39;Qatar&#39;,
+ &#39;Republic of Korea&#39;,
+ &#39;Republic of Moldova&#39;,
+ &#39;R?nion&#39;,
+ &#39;Romania&#39;,
+ &#39;Russian Federation&#39;,
+ &#39;Rwanda&#39;,
+ &#39;Saint Helena, Ascension and Tristan da Cunha&#39;,
+ &#39;Saint Kitts and Nevis&#39;,
+ &#39;Saint Lucia&#39;,
+ &#39;Saint Pierre and Miquelon&#39;,
+ &#39;Saint Vincent and the Grenadines&#39;,
+ &#39;Samoa&#39;,
+ &#39;San Marino&#39;,
+ &#39;Sao Tome and Principe&#39;,
+ &#39;Saudi Arabia&#39;,
+ &#39;Senegal&#39;,
+ &#39;Serbia&#39;,
+ &#39;Serbia and Montenegro&#39;,
+ &#39;Seychelles&#39;,
+ &#39;Sierra Leone&#39;,
+ &#39;Singapore&#39;,
+ &#39;Slovakia&#39;,
+ &#39;Slovenia&#39;,
+ &#39;Solomon Islands&#39;,
+ &#39;Somalia&#39;,
+ &#39;South Africa&#39;,
+ &#39;South Sudan&#39;,
+ &#39;Spain&#39;,
+ &#39;Sri Lanka&#39;,
+ &#39;Sudan&#39;,
+ &#39;Sudan (former)&#39;,
+ &#39;Suriname&#39;,
+ &#39;Svalbard and Jan Mayen Islands&#39;,
+ &#39;Sweden&#39;,
+ &#39;Switzerland&#39;,
+ &#39;Syrian Arab Republic&#39;,
+ &#39;Tajikistan&#39;,
+ &#39;Thailand&#39;,
+ &#39;Timor-Leste&#39;,
+ &#39;Togo&#39;,
+ &#39;Tokelau&#39;,
+ &#39;Tonga&#39;,
+ &#39;Trinidad and Tobago&#39;,
+ &#39;Tunisia&#39;,
+ &#39;T?kiye&#39;,
+ &#39;Turkmenistan&#39;,
+ &#39;Turks and Caicos Islands&#39;,
+ &#39;Tuvalu&#39;,
+ &#39;Uganda&#39;,
+ &#39;Ukraine&#39;,
+ &#39;United Arab Emirates&#39;,
+ &#39;United Kingdom of Great Britain and Northern Ireland&#39;,
+ &#39;United Republic of Tanzania&#39;,
+ &#39;United States of America&#39;,
+ &#39;United States Virgin Islands&#39;,
+ &#39;Uruguay&#39;,
+ &#39;USSR&#39;,
+ &#39;Uzbekistan&#39;,
+ &#39;Vanuatu&#39;,
+ &#39;Venezuela (Bolivarian Republic of)&#39;,
+ &#39;Viet Nam&#39;,
+ &#39;Wallis and Futuna Islands&#39;,
+ &#39;Western Sahara&#39;,
+ &#39;Yemen&#39;,
+ &#39;Yugoslav SFR&#39;,
+ &#39;Zambia&#39;,
+ &#39;Zimbabwe&#39;,
+ &#39;World&#39;,
+ &#39;Africa&#39;,
+ &#39;Eastern Africa&#39;,
+ &#39;Middle Africa&#39;,
+ &#39;Northern Africa&#39;,
+ &#39;Southern Africa&#39;,
+ &#39;Western Africa&#39;,
+ &#39;Americas&#39;,
+ &#39;Northern America&#39;,
+ &#39;Central America&#39;,
+ &#39;Caribbean&#39;,
+ &#39;South America&#39;,
+ &#39;Asia&#39;,
+ &#39;Central Asia&#39;,
+ &#39;Eastern Asia&#39;,
+ &#39;Southern Asia&#39;,
+ &#39;South-eastern Asia&#39;,
+ &#39;Western Asia&#39;,
+ &#39;Europe&#39;,
+ &#39;Eastern Europe&#39;,
+ &#39;Northern Europe&#39;,
+ &#39;Southern Europe&#39;,
+ &#39;Western Europe&#39;,
+ &#39;Oceania&#39;,
+ &#39;Australia and New Zealand&#39;,
+ &#39;Melanesia&#39;,
+ &#39;Micronesia&#39;,
+ &#39;Polynesia&#39;,
+ &#39;European Union (27)&#39;,
+ &#39;Least Developed Countries&#39;,
+ &#39;Land Locked Developing Countries&#39;,
+ &#39;Small Island Developing States&#39;,
+ &#39;Low Income Food Deficit Countries&#39;,
+ &#39;Net Food Importing Developing Countries&#39;,
+ &#39;Annex I countries&#39;,
+ &#39;Non-Annex I countries&#39;,
+ &#39;OECD&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">calculate_median</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">column</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+    <span class="n">median</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">column</span><span class="p">]</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">median</span>
+
+<span class="n">calculate_median</span><span class="p">(</span><span class="n">Energy</span><span class="p">,</span> <span class="s1">&#39;Land Area(Km2)&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>117600.0
+</pre></div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="simple visible nav section-nav flex-column">
+</ul>
+
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By Yen-Chia Hsu
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341"></script>
+<script src="_static/scripts/pydata-sphinx-theme.js?digest=3ee479438cf8b5e0d341"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
