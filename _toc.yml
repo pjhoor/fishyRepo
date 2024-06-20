@@ -5,9 +5,4 @@ format: jb-book
 root: docs/home
 chapters:
 - file: docs/notebook # Delete this later
-- file: docs/introduction
-- file: docs/preprocessing
-- file: docs/story
-- file: docs/summary
-- file: docs/reflection
-- file: docs/work_distribution
+- file: docs/final
