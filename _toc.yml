@@ -2,7 +2,7 @@
 # Learn more at https://jupyterbook.org/customize/toc.html
 
 format: jb-book
-root: docs/introduction.ipynb
+root: docs/introduction.md
 chapters:
 - file: docs/data_preprocessing.ipynb
 - file: docs/story.ipynb
