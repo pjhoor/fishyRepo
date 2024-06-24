@@ -32,7 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/styles/sphinx-book-theme.css?v=384b581d" />
     <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css?v=13237357" />
     <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=76b2166b" />
-    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../../_static/sphinx-design.min.css?v=87e54e7c" />
     <link rel="stylesheet" type="text/css" href="../../_static/theme.css" />
@@ -59,8 +59,9 @@
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'graphs/graphC/graphC';</script>
+    <script src="../../_static/js/enfore_light_theme.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <link rel="icon" href="../../_static/favicon.ico"/>
+    <link rel="icon" href="../../_static/favicon2.ico"/>
     <link rel="index" title="Index" href="../../genindex.html" />
     <link rel="search" title="Search" href="../../search.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
@@ -181,6 +182,7 @@
         <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../../docs/data_preprocessing.html">Dataset and Preprocessing</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../docs/story.html">&lt;Story&gt; (title to be decided)</a></li>
+
 <li class="toctree-l1"><a class="reference internal" href="../../docs/reflection.html">Reflection</a></li>
 </ul>
 
@@ -223,37 +225,6 @@
         <div class="header-article-item">
 
 <div class="article-header-buttons">
-
-
-
-
-
-<div class="dropdown dropdown-launch-buttons">
-  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
-    <i class="fas fa-rocket"></i>
-  </button>
-  <ul class="dropdown-menu">
-      
-      
-      
-      <li><a href="https://colab.research.google.com/github/pjhoor/fishyRepo/blob/main/docs/graphs/graphC/graphC.ipynb" target="_blank"
-   class="btn btn-sm dropdown-item"
-   title="Launch onColab"
-   data-bs-placement="left" data-bs-toggle="tooltip"
->
-  
-
-<span class="btn__icon-container">
-  
-    <img src="../../_static/images/logo_colab.png">
-  </span>
-<span class="btn__text-container">Colab</span>
-</a>
-</li>
-      
-  </ul>
-</div>
-
 
 
 <a href="https://github.com/pjhoor/fishyRepo" target="_blank"
@@ -507,11 +478,11 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\pjhoor\AppData\Local\Temp\ipykernel_20852\569832872.py:3: FutureWarning: The geopandas.dataset module is deprecated and will be removed in GeoPandas 1.0. You can get the original &#39;naturalearth_lowres&#39; data from https://www.naturalearthdata.com/downloads/110m-cultural-vectors/.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6105/569832872.py:3: FutureWarning: The geopandas.dataset module is deprecated and will be removed in GeoPandas 1.0. You can get the original &#39;naturalearth_lowres&#39; data from https://www.naturalearthdata.com/downloads/110m-cultural-vectors/.
   world = gpd.read_file(gpd.datasets.get_path(&quot;naturalearth_lowres&quot;))
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="../../_images/199e7ccfd62852139bae57ea4c2bf3c6f404746ea79b4781d6a636ffef23f42d.png"><img alt="../../_images/199e7ccfd62852139bae57ea4c2bf3c6f404746ea79b4781d6a636ffef23f42d.png" src="../../_images/199e7ccfd62852139bae57ea4c2bf3c6f404746ea79b4781d6a636ffef23f42d.png" style="width: 1920px; height: 1080px;" /></a>
+<a class="reference internal image-reference" href="../../_images/d36509a62ed6169eb7f500915304fc718b396c8320717ca1dbc260c295b12326.png"><img alt="../../_images/d36509a62ed6169eb7f500915304fc718b396c8320717ca1dbc260c295b12326.png" src="../../_images/d36509a62ed6169eb7f500915304fc718b396c8320717ca1dbc260c295b12326.png" style="width: 1920px; height: 1080px;" /></a>
 </div>
 </div>
 <div class="cell docutils container">
@@ -592,11 +563,11 @@ document.write(`
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\pjhoor\AppData\Local\Temp\ipykernel_20852\532717123.py:3: FutureWarning: The geopandas.dataset module is deprecated and will be removed in GeoPandas 1.0. You can get the original &#39;naturalearth_lowres&#39; data from https://www.naturalearthdata.com/downloads/110m-cultural-vectors/.
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/tmp/ipykernel_6105/532717123.py:3: FutureWarning: The geopandas.dataset module is deprecated and will be removed in GeoPandas 1.0. You can get the original &#39;naturalearth_lowres&#39; data from https://www.naturalearthdata.com/downloads/110m-cultural-vectors/.
   world = gpd.read_file(gpd.datasets.get_path(&quot;naturalearth_lowres&quot;))
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="../../_images/a211c9937e678746f25dd4bcd088a563d4fe06da2a1e07bc9b6f4aad3a8d6875.png"><img alt="../../_images/a211c9937e678746f25dd4bcd088a563d4fe06da2a1e07bc9b6f4aad3a8d6875.png" src="../../_images/a211c9937e678746f25dd4bcd088a563d4fe06da2a1e07bc9b6f4aad3a8d6875.png" style="width: 1920px; height: 1080px;" /></a>
+<a class="reference internal image-reference" href="../../_images/ed685286261ec086a77233ea42ade8f9185c2ccf51b4a8f993cff88548f1f56e.png"><img alt="../../_images/ed685286261ec086a77233ea42ade8f9185c2ccf51b4a8f993cff88548f1f56e.png" src="../../_images/ed685286261ec086a77233ea42ade8f9185c2ccf51b4a8f993cff88548f1f56e.png" style="width: 1920px; height: 1080px;" /></a>
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>-0.2888799978031634 65.46639231843575
 </pre></div>
 </div>
@@ -616,7 +587,7 @@ document.write(`
         },
         kernelOptions: {
             name: "python3",
-            path: "./graphs\graphC"
+            path: "./graphs/graphC"
         },
         predefinedOutput: true
     }
