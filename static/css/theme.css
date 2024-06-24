@@ -1,0 +1,76 @@
+/* Color palette:
+Name: Pastel Green
+Hex: #79E381
+
+Name: UFO Green
+Hex: #48C353
+
+Name: Dark-Green
+Hex: #20AF24
+
+Name: Rich Electric Blue
+Hex: #009CD1
+
+Name: Picton Blue
+Hex: #30BEE1
+
+Name: Crayola's Sky Blue
+Hex: #63CFEA
+*/
+.theme-switch-button {
+    display: none !important;
+  }
+  
+  .bd-sidebar-primary .sidebar-primary-items__end {
+    margin-top: 0;
+  }
+  
+  .bd-article-container h1,
+  .bd-article-container h2 {
+    color: #343a42;
+  }
+  
+  nav.bd-links {
+    margin-right: 0;
+  }
+  
+  .toc-entry a.nav-link.active {
+    border-left-color: #20AF24;
+  }
+  
+  a,
+  a:hover,
+  a:focus,
+  .prev-next-area a p.prev-next-title,
+  .toc-entry a.nav-link:hover,
+  .toc-entry a.nav-link.active,
+  nav.bd-links .active:hover > a,
+  nav.bd-links .active:focus > a,
+  nav.bd-links .active > a,
+  nav.bd-links li > a:hover,
+  nav.bd-links li > a:focus {
+    color: #20AF24;
+  }
+  
+  code.literal {
+    background-color: #79E381;
+    color: #333a42;
+    border: 1px solid #48C353;
+  }
+  
+  .logo__image {
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    border: 1px solid #48C353;
+  }
+  
+  @media (min-width: 992px) {
+    .bd-sidebar-secondary {
+      height: 100vh;
+      max-height: none;
+    }
+  
+    .bd-sidebar-secondary .sidebar-secondary-items {
+      height: 100%;
+    }
+  }

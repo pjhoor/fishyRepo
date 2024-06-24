@@ -2,7 +2,8 @@
 # Learn more at https://jupyterbook.org/customize/toc.html
 
 format: jb-book
-root: docs/home
+root: docs/introduction.ipynb
 chapters:
-- file: docs/notebook # Delete this later
-- file: docs/final
+- file: docs/data_preprocessing.ipynb
+- file: docs/story.ipynb
+- file: docs/reflection.ipynb
