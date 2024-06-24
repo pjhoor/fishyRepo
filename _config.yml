@@ -37,7 +37,7 @@ sphinx:
       default_mode: "light"
     html_static_path: "static"
     html_css_files:
-      - "theme.css"
+      - "css/theme.css"
     html_js_files:
       # To force the light theme
       - "js/enforce_light_theme.js"
