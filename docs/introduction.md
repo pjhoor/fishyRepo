@@ -13,3 +13,12 @@ However, although global warming is indeed a big problem in the world, sustainab
 
 
 In short, this data story will explore the correlation between emissions and sustainable energy per country.
+
+
+[Click here to read the data story](story.ipynb)
+
+**Authors**
+
+- Pepijn ten Hoor
+- Jaimie Lauppe
+- Cristy Russell
