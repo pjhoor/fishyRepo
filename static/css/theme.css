@@ -80,26 +80,3 @@ code.literal {
     height: 100%;
   }
 }
-
-/* ### contentsBar and navBar hack */
-
-/* Move the navbar to the extreme left */
-.navbar {
-  margin-left: 0;
-}
-
-/* Move the TOC (Table of Contents) sidebar to the extreme right */
-.toc {
-  margin-right: 0;
-}
-
-/* Increase the width of the main content area */
-.main-content {
-  max-width: 100%;
-  width: calc(100% - 300px); /* Assuming the TOC/sidebar takes about 300px */
-}
-
-/* Adjust the layout for the Jupyter cells specifically, if needed */
-.jp-Cell {
-  max-width: 100%;
-}
