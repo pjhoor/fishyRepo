@@ -21,6 +21,7 @@ if __name__ == '__main__':
 
         if 'remove_input' not in cell_tags:
             cell_tags.append('remove_input')
+            cell_tags.append('full-width')
 
         cell['metadata']['tags'] = cell_tags
 
