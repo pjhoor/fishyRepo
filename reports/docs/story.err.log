@@ -1,133 +1,114 @@
 Traceback (most recent call last):
-  File "/home/jaimie/miniconda3/envs/jupyterbook/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+  File "/home/pjhoor/miniconda3/envs/jupyterbook/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
     executenb(
-  File "/home/jaimie/miniconda3/envs/jupyterbook/lib/python3.10/site-packages/nbclient/client.py", line 1314, in execute
+  File "/home/pjhoor/miniconda3/envs/jupyterbook/lib/python3.10/site-packages/nbclient/client.py", line 1314, in execute
     return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
-  File "/home/jaimie/.local/lib/python3.10/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+  File "/home/pjhoor/miniconda3/envs/jupyterbook/lib/python3.10/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
     return loop.run_until_complete(inner)
-  File "/home/jaimie/miniconda3/envs/jupyterbook/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+  File "/home/pjhoor/miniconda3/envs/jupyterbook/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
     return future.result()
-  File "/home/jaimie/miniconda3/envs/jupyterbook/lib/python3.10/site-packages/nbclient/client.py", line 709, in async_execute
+  File "/home/pjhoor/miniconda3/envs/jupyterbook/lib/python3.10/site-packages/nbclient/client.py", line 709, in async_execute
     await self.async_execute_cell(
-  File "/home/jaimie/miniconda3/envs/jupyterbook/lib/python3.10/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+  File "/home/pjhoor/miniconda3/envs/jupyterbook/lib/python3.10/site-packages/nbclient/client.py", line 1062, in async_execute_cell
     await self._check_raise_for_error(cell, cell_index, exec_reply)
-  File "/home/jaimie/miniconda3/envs/jupyterbook/lib/python3.10/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+  File "/home/pjhoor/miniconda3/envs/jupyterbook/lib/python3.10/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-years = ['2000', '2005', '2010', '2015', '2020']
+import pandas as pd
+import matplotlib.patches as mpatches
+import matplotlib.pyplot as plt
+import matplotlib.colors as mcolors
+import numpy as np
+import seaborn as sns
+import geopandas as gpd
 
-mergeN = pd.read_csv('../datasets/graphMakers/graphA/mergeN.csv')
+ems_2020_rel = pd.read_csv('../datasets/graphMakers/graphA/mergeN.csv', usecols=['Area','2020rel'])
+ems_2020_relTREES = pd.read_csv('../datasets/graphMakers/graphA/mergeY.csv', usecols=['Area','2020rel'])
 
-"""
-# Calculate the average of the relative values for each country
-mergeN['avg'] = mergeN[[year for year in years]].mean(axis=1)
+#no trees
 
-# Sort by the average and select the top 10
-top_countries = mergeN.sort_values('avg', ascending=False).head(10)
+world = gpd.read_file(gpd.datasets.get_path("naturalearth_lowres"))
 
-# Create a new Figure
-fig = go.Figure()
+# initialize a final empty figure
+fig, ax = plt.subplots(figsize=(20, 10))
 
-# Add a bar for each year
-for year in years:
-    fig.add_trace(go.Bar(
-        x=top_countries['Area'],
-        y=top_countries[year],
-        name=year
-    ))
+# drop "Antarctica" and "Seven seas" from the dataframe
+drop_idxs = world["continent"].isin([
+    "Antarctica",
+    "Seven seas (open ocean)"
+])
+world = world.drop(world[drop_idxs].index)
 
-# Change the bar mode to group
-fig.update_layout(barmode='group')
-
-# Add labels and title
-fig.update_layout(
-    title='Total CO2 emission per Country for the years 2000-2005-2010-2015-2020 (without LULUCF) for the top 10 most emitting countries',
-    xaxis_title='Country',
-    yaxis_title='Value'
+# start by plotting a map of the world
+world.boundary.plot(
+    ax=ax,
+    color="black",
+    linewidth=0.5
 )
 
-# Show the plot
-fig.show()
-"""
-
-# Calculate the average of the relative values for each country
-mergeN['avg'] = mergeN[[year+'rel' for year in years]].mean(axis=1)
-
-# Sort by the average and select the top 10
-top_countries = mergeN.sort_values('avg', ascending=False).head(10)
-
-# Create a new Figure
-fig = go.Figure()
-
-# Add a bar for each year
-for year in years:
-    fig.add_trace(go.Bar(
-        x=top_countries['Area'],
-        y=top_countries[year+'rel'],
-        name=year
-    ))
-
-# Change the bar mode to group
-fig.update_layout(barmode='group')
-
-# Add labels and title
-fig.update_layout(
-    title='Total relative CO2 emission per Country for the years 2000-2005-2010-2015-2020 (without LULUCF) for the top 10 most emitting countries',
-    xaxis_title='Country',
-    yaxis_title='Value'
+# Define a custom colormap
+cmap = mcolors.LinearSegmentedColormap.from_list(
+    "custom",
+    [(0, 1, 0), (1, 1, 0), (1, 0, 0)],
+    N=256
 )
 
-# Show the plot
-fig.show()
+# normalize the '2020rel' values to the range [0, 1] for the colormap
+norm = plt.Normalize(ems_2020_rel['2020rel'].min(), ems_2020_rel['2020rel'].median())
 
-# Calculate the average of the relative values for each country
-mergeN['avg'] = mergeN[[year+'rel' for year in years]].mean(axis=1)
+# loop over the countries in the world dataframe
+for country_name in world["name"].unique():
+    # grab all countries that belong to the continent
+    country = world[world["name"] == country_name]
+
+    # check if the country is in the ems_2020_rel dataframe
+    if country_name in ems_2020_rel['Area'].values:
+        # get the '2020rel' value for the country
+        rel_value = ems_2020_rel[ems_2020_rel['Area'] == country_name]['2020rel'].values[0]
+
+        # get the color corresponding to the '2020rel' value
+        color = cmap(norm(rel_value))
+    else:
+        # if the country is not in the ems_2020_rel dataframe, use white color
+        color = 'white'
+
+    # plot the country with the color
+    country.plot(ax=ax, color=color, alpha=0.5)
+
+# turn off axis ticks
+ax.set_xticks([])
+ax.set_yticks([])
+
+# set the plot title and subtitle
+plt.title("Countries of the world, colored by CO2 emissions from 2020 (LULUCF excluded)")
 
 
+# create a ScalarMappable for the colorbar with unnormalized values
+norm_cbar = plt.Normalize(ems_2020_rel['2020rel'].min(), ems_2020_rel['2020rel'].max())
+sm_cbar = plt.cm.ScalarMappable(cmap=cmap, norm=norm_cbar)
+sm_cbar.set_array([])
+cbar = fig.colorbar(sm_cbar, orientation="vertical", fraction=0.036, pad=0.1, aspect = 30, cax=ax.inset_axes([1.0, 0, 0.05, 1]))
 
-# Sort by the average and select the bottom 10
-top_countries = mergeN.sort_values('avg', ascending=True).head(10)
+cbar.set_label("CO2 emissions from 2020 (in kilotonnes/km²)")
 
-# Create a new Figure
-fig = go.Figure()
+# create custom legend
+patch1 = mpatches.Patch(facecolor=(1, 1, 1), edgecolor='black', label='Country missing in dataset')
+plt.legend(handles=[patch1], loc='lower left')
 
-# Add a bar for each year
-for year in years:
-    fig.add_trace(go.Bar(
-        x=top_countries['Area'],
-        y=top_countries[year+'rel'],
-        name=year
-    ))
-
-# Change the bar mode to group
-fig.update_layout(barmode='group')
-
-# Add labels and title
-fig.update_layout(
-    title='Total CO2 emission per Country for the years 2000-2005-2010-2015-2020 (without LULUCF) for the top 10 least emitting countries',
-    xaxis_title='Country',
-    yaxis_title='Value'
-)
-
-# Show the plot
-fig.show()
+plt.show()
 
 ------------------
 
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mFileNotFoundError[0m                         Traceback (most recent call last)
-Cell [0;32mIn[7], line 3[0m
-[1;32m      1[0m years [38;5;241m=[39m [[38;5;124m'[39m[38;5;124m2000[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124m2005[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124m2010[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124m2015[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124m2020[39m[38;5;124m'[39m]
-[0;32m----> 3[0m mergeN [38;5;241m=[39m [43mpd[49m[38;5;241;43m.[39;49m[43mread_csv[49m[43m([49m[38;5;124;43m'[39;49m[38;5;124;43m../datasets/graphMakers/graphA/mergeN.csv[39;49m[38;5;124;43m'[39;49m[43m)[49m
-[1;32m      5[0m [38;5;124;03m"""[39;00m
-[1;32m      6[0m [38;5;124;03m# Calculate the average of the relative values for each country[39;00m
-[1;32m      7[0m [38;5;124;03mmergeN['avg'] = mergeN[[year for year in years]].mean(axis=1)[39;00m
-[0;32m   (...)[0m
-[1;32m     34[0m [38;5;124;03mfig.show()[39;00m
-[1;32m     35[0m [38;5;124;03m"""[39;00m
-[1;32m     37[0m [38;5;66;03m# Calculate the average of the relative values for each country[39;00m
+Cell [0;32mIn[5], line 9[0m
+[1;32m      6[0m [38;5;28;01mimport[39;00m [38;5;21;01mseaborn[39;00m [38;5;28;01mas[39;00m [38;5;21;01msns[39;00m
+[1;32m      7[0m [38;5;28;01mimport[39;00m [38;5;21;01mgeopandas[39;00m [38;5;28;01mas[39;00m [38;5;21;01mgpd[39;00m
+[0;32m----> 9[0m ems_2020_rel [38;5;241m=[39m [43mpd[49m[38;5;241;43m.[39;49m[43mread_csv[49m[43m([49m[38;5;124;43m'[39;49m[38;5;124;43m../datasets/graphMakers/graphA/mergeN.csv[39;49m[38;5;124;43m'[39;49m[43m,[49m[43m [49m[43musecols[49m[38;5;241;43m=[39;49m[43m[[49m[38;5;124;43m'[39;49m[38;5;124;43mArea[39;49m[38;5;124;43m'[39;49m[43m,[49m[38;5;124;43m'[39;49m[38;5;124;43m2020rel[39;49m[38;5;124;43m'[39;49m[43m][49m[43m)[49m
+[1;32m     10[0m ems_2020_relTREES [38;5;241m=[39m pd[38;5;241m.[39mread_csv([38;5;124m'[39m[38;5;124m../datasets/graphMakers/graphA/mergeY.csv[39m[38;5;124m'[39m, usecols[38;5;241m=[39m[[38;5;124m'[39m[38;5;124mArea[39m[38;5;124m'[39m,[38;5;124m'[39m[38;5;124m2020rel[39m[38;5;124m'[39m])
+[1;32m     12[0m [38;5;66;03m#no trees[39;00m
 
 File [0;32m~/miniconda3/envs/jupyterbook/lib/python3.10/site-packages/pandas/io/parsers/readers.py:1026[0m, in [0;36mread_csv[0;34m(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, date_format, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options, dtype_backend)[0m
 [1;32m   1013[0m kwds_defaults [38;5;241m=[39m _refine_defaults_read(
