@@ -35,7 +35,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=87e54e7c" />
-    <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=20cee386" />
+    <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=1d7a7e84" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=3ee479438cf8b5e0d341" />
@@ -181,7 +181,7 @@
         </ul>
         <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="../docs/data_preprocessing.html">Dataset and Preprocessing</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../docs/story.html">&lt;Story&gt; (title to be decided)</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../docs/story.html">The correlation between sustainable energy and emissions</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="../docs/reflection.html">Reflection</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../docs/work_distribution.html">Work Distribution</a></li>
@@ -1404,16 +1404,688 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">df_melt</span><span class="p">,</span> <span class="n">df2</span><span class="p">,</span> <span class="n">left_on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Area&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">],</span> <span class="n">right_on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;Entity&#39;</span><span class="p">,</span> <span class="s1">&#39;Year&#39;</span><span class="p">],</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;left&#39;</span><span class="p">)</span>
+<span class="n">clean_merged</span> <span class="o">=</span> <span class="n">merged</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span> <span class="s1">&#39;Unit&#39;</span><span class="p">,</span> <span class="s1">&#39;Access to electricity (</span><span class="si">% o</span><span class="s1">f population)&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Access to clean fuels for cooking&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Renewable-electricity-generating-capacity-per-capita&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Financial flows to developing countries (US $)&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Electricity from fossil fuels (TWh)&#39;</span><span class="p">,</span> <span class="s1">&#39;Electricity from nuclear (TWh)&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Electricity from renewables (TWh)&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Low-carbon electricity (</span><span class="si">% e</span><span class="s1">lectricity)&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Primary energy consumption per capita (kWh/person)&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Energy intensity level of primary energy (MJ/$2017 PPP GDP)&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Value_co2_emissions_kt_by_country&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Renewables (</span><span class="si">% e</span><span class="s1">quivalent primary energy)&#39;</span><span class="p">,</span> <span class="s1">&#39;gdp_growth&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;gdp_per_capita&#39;</span><span class="p">,</span> <span class="s1">&#39;Density</span><span class="se">\\</span><span class="s1">n(P/Km2)&#39;</span><span class="p">,</span> <span class="s1">&#39;Land Area(Km2)&#39;</span><span class="p">,</span> <span class="s1">&#39;Latitude&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;Longitude&#39;</span><span class="p">])</span>
+<span class="n">clean_merged</span>
+<span class="n">merged</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Area</th>
+      <th>Item</th>
+      <th>Element</th>
+      <th>Unit</th>
+      <th>Year</th>
+      <th>Emission</th>
+      <th>Entity</th>
+      <th>Access to electricity (% of population)</th>
+      <th>Access to clean fuels for cooking</th>
+      <th>Renewable-electricity-generating-capacity-per-capita</th>
+      <th>...</th>
+      <th>Primary energy consumption per capita (kWh/person)</th>
+      <th>Energy intensity level of primary energy (MJ/$2017 PPP GDP)</th>
+      <th>Value_co2_emissions_kt_by_country</th>
+      <th>Renewables (% equivalent primary energy)</th>
+      <th>gdp_growth</th>
+      <th>gdp_per_capita</th>
+      <th>Density\n(P/Km2)</th>
+      <th>Land Area(Km2)</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Afghanistan</td>
+      <td>Crop Residues</td>
+      <td>Direct emissions (N2O)</td>
+      <td>kilotonnes</td>
+      <td>2000</td>
+      <td>5.200000e-01</td>
+      <td>Afghanistan</td>
+      <td>1.613591</td>
+      <td>6.2</td>
+      <td>9.22</td>
+      <td>...</td>
+      <td>302.59482</td>
+      <td>1.64</td>
+      <td>760.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>60</td>
+      <td>652230.0</td>
+      <td>33.93911</td>
+      <td>67.709953</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Afghanistan</td>
+      <td>Crop Residues</td>
+      <td>Indirect emissions (N2O)</td>
+      <td>kilotonnes</td>
+      <td>2000</td>
+      <td>1.170000e-01</td>
+      <td>Afghanistan</td>
+      <td>1.613591</td>
+      <td>6.2</td>
+      <td>9.22</td>
+      <td>...</td>
+      <td>302.59482</td>
+      <td>1.64</td>
+      <td>760.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>60</td>
+      <td>652230.0</td>
+      <td>33.93911</td>
+      <td>67.709953</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Afghanistan</td>
+      <td>Crop Residues</td>
+      <td>Emissions (N2O)</td>
+      <td>kilotonnes</td>
+      <td>2000</td>
+      <td>6.370000e-01</td>
+      <td>Afghanistan</td>
+      <td>1.613591</td>
+      <td>6.2</td>
+      <td>9.22</td>
+      <td>...</td>
+      <td>302.59482</td>
+      <td>1.64</td>
+      <td>760.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>60</td>
+      <td>652230.0</td>
+      <td>33.93911</td>
+      <td>67.709953</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Afghanistan</td>
+      <td>Crop Residues</td>
+      <td>Emissions (CO2eq) from N2O (AR5)</td>
+      <td>kilotonnes</td>
+      <td>2000</td>
+      <td>1.688070e+02</td>
+      <td>Afghanistan</td>
+      <td>1.613591</td>
+      <td>6.2</td>
+      <td>9.22</td>
+      <td>...</td>
+      <td>302.59482</td>
+      <td>1.64</td>
+      <td>760.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>60</td>
+      <td>652230.0</td>
+      <td>33.93911</td>
+      <td>67.709953</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Afghanistan</td>
+      <td>Crop Residues</td>
+      <td>Emissions (CO2eq) (AR5)</td>
+      <td>kilotonnes</td>
+      <td>2000</td>
+      <td>1.688070e+02</td>
+      <td>Afghanistan</td>
+      <td>1.613591</td>
+      <td>6.2</td>
+      <td>9.22</td>
+      <td>...</td>
+      <td>302.59482</td>
+      <td>1.64</td>
+      <td>760.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>60</td>
+      <td>652230.0</td>
+      <td>33.93911</td>
+      <td>67.709953</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1234060</th>
+      <td>OECD</td>
+      <td>All sectors without LULUCF</td>
+      <td>Emissions (CO2)</td>
+      <td>kilotonnes</td>
+      <td>2020</td>
+      <td>1.088919e+07</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1234061</th>
+      <td>OECD</td>
+      <td>All sectors without LULUCF</td>
+      <td>Emissions (CO2eq) from F-gases (AR5)</td>
+      <td>kilotonnes</td>
+      <td>2020</td>
+      <td>9.208261e+05</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1234062</th>
+      <td>OECD</td>
+      <td>All sectors without LULUCF</td>
+      <td>Emissions (CO2eq) from CH4 (AR5)</td>
+      <td>kilotonnes</td>
+      <td>2020</td>
+      <td>1.825476e+06</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1234063</th>
+      <td>OECD</td>
+      <td>All sectors without LULUCF</td>
+      <td>Emissions (CO2eq) from N2O (AR5)</td>
+      <td>kilotonnes</td>
+      <td>2020</td>
+      <td>8.009744e+05</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1234064</th>
+      <td>OECD</td>
+      <td>All sectors without LULUCF</td>
+      <td>Emissions (CO2eq) (AR5)</td>
+      <td>kilotonnes</td>
+      <td>2020</td>
+      <td>1.443647e+07</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>1234065 rows × 26 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">small_merge</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">small_merge</span><span class="p">[</span><span class="s1">&#39;Area&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">merged</span><span class="p">[</span><span class="s1">&#39;Area&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
+<span class="n">small_merge</span><span class="p">[</span><span class="s1">&#39;Item&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">merged</span><span class="p">[</span><span class="s1">&#39;Item&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
+<span class="n">small_merge</span><span class="p">[</span><span class="s1">&#39;Element&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">merged</span><span class="p">[</span><span class="s1">&#39;Element&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
+<span class="n">small_merge</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">merged</span><span class="p">[</span><span class="s1">&#39;Year&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;int16&#39;</span><span class="p">)</span>
+<span class="n">small_merge</span><span class="p">[</span><span class="s1">&#39;Emission&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">merged</span><span class="p">[</span><span class="s1">&#39;Emission&#39;</span><span class="p">]</span>
+<span class="n">small_merge</span><span class="p">[</span><span class="s1">&#39;Item&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">merged</span><span class="p">[</span><span class="s1">&#39;Item&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;category&#39;</span><span class="p">)</span>
+<span class="n">small_merge</span><span class="p">[</span><span class="s1">&#39;Access to electricity (</span><span class="si">% o</span><span class="s1">f population)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">merged</span><span class="p">[</span><span class="s1">&#39;Access to electricity (</span><span class="si">% o</span><span class="s1">f population)&#39;</span><span class="p">]</span>
+<span class="n">small_merge</span><span class="p">[</span><span class="s1">&#39;Access to clean fuels for cooking&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">merged</span><span class="p">[</span><span class="s1">&#39;Access to clean fuels for cooking&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+<span class="n">small_merge</span><span class="p">[</span><span class="s1">&#39;Renewable-electricity-generating-capacity-per-capita&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">merged</span><span class="p">[</span><span class="s1">&#39;Renewable-electricity-generating-capacity-per-capita&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+<span class="n">small_merge</span><span class="p">[</span><span class="s1">&#39;Financial flows to developing countries (US $)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">merged</span><span class="p">[</span><span class="s1">&#39;Financial flows to developing countries (US $)&#39;</span><span class="p">]</span>
+<span class="n">small_merge</span><span class="p">[</span><span class="s1">&#39;Renewable energy share in the total final energy consumption (%)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">merged</span><span class="p">[</span><span class="s1">&#39;Renewable energy share in the total final energy consumption (%)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+<span class="n">small_merge</span><span class="p">[</span><span class="s1">&#39;Electricity from fossil fuels (TWh)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">merged</span><span class="p">[</span><span class="s1">&#39;Electricity from fossil fuels (TWh)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+<span class="n">small_merge</span><span class="p">[</span><span class="s1">&#39;Electricity from nuclear (TWh)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">merged</span><span class="p">[</span><span class="s1">&#39;Electricity from nuclear (TWh)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+<span class="n">small_merge</span><span class="p">[</span><span class="s1">&#39;Low-carbon electricity (</span><span class="si">% e</span><span class="s1">lectricity)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">merged</span><span class="p">[</span><span class="s1">&#39;Low-carbon electricity (</span><span class="si">% e</span><span class="s1">lectricity)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+<span class="n">small_merge</span><span class="p">[</span><span class="s1">&#39;Primary energy consumption per capita (kWh/person)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">merged</span><span class="p">[</span><span class="s1">&#39;Primary energy consumption per capita (kWh/person)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+<span class="n">small_merge</span><span class="p">[</span><span class="s1">&#39;Energy intensity level of primary energy (MJ/$2017 PPP GDP)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">merged</span><span class="p">[</span><span class="s1">&#39;Energy intensity level of primary energy (MJ/$2017 PPP GDP)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+<span class="n">small_merge</span><span class="p">[</span><span class="s1">&#39;Value_co2_emissions_kt_by_country&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">merged</span><span class="p">[</span><span class="s1">&#39;Value_co2_emissions_kt_by_country&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+<span class="n">small_merge</span><span class="p">[</span><span class="s1">&#39;Renewables (</span><span class="si">% e</span><span class="s1">quivalent primary energy)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">merged</span><span class="p">[</span><span class="s1">&#39;Renewables (</span><span class="si">% e</span><span class="s1">quivalent primary energy)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+<span class="n">small_merge</span><span class="p">[</span><span class="s1">&#39;gdp_growth&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">merged</span><span class="p">[</span><span class="s1">&#39;gdp_growth&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+<span class="n">small_merge</span><span class="p">[</span><span class="s1">&#39;gdp_per_capita&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">merged</span><span class="p">[</span><span class="s1">&#39;gdp_per_capita&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+<span class="n">small_merge</span><span class="p">[</span><span class="s1">&#39;Density</span><span class="se">\\</span><span class="s1">n(P/Km2)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">merged</span><span class="p">[</span><span class="s1">&#39;Density</span><span class="se">\\</span><span class="s1">n(P/Km2)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float32&#39;</span><span class="p">)</span>
+<span class="n">small_merge</span><span class="p">[</span><span class="s1">&#39;Land Area(Km2)&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">merged</span><span class="p">[</span><span class="s1">&#39;Land Area(Km2)&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span>
+<span class="n">small_merge</span><span class="p">[</span><span class="s1">&#39;Latitude&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">merged</span><span class="p">[</span><span class="s1">&#39;Latitude&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span>
+<span class="n">small_merge</span><span class="p">[</span><span class="s1">&#39;Longitude&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">merged</span><span class="p">[</span><span class="s1">&#39;Longitude&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="s1">&#39;float64&#39;</span><span class="p">)</span>
+
+
+
+<span class="n">small_merge</span><span class="o">.</span><span class="n">to_parquet</span><span class="p">(</span><span class="s1">&#39;small_merge.parquet&#39;</span><span class="p">,</span> <span class="n">compression</span><span class="o">=</span><span class="s1">&#39;gzip&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">merged</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;merged_to_csv.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="s1">&#39;small_merge.parquet&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Area</th>
+      <th>Item</th>
+      <th>Element</th>
+      <th>Year</th>
+      <th>Emission</th>
+      <th>Access to electricity (% of population)</th>
+      <th>Access to clean fuels for cooking</th>
+      <th>Renewable-electricity-generating-capacity-per-capita</th>
+      <th>Financial flows to developing countries (US $)</th>
+      <th>Renewable energy share in the total final energy consumption (%)</th>
+      <th>...</th>
+      <th>Primary energy consumption per capita (kWh/person)</th>
+      <th>Energy intensity level of primary energy (MJ/$2017 PPP GDP)</th>
+      <th>Value_co2_emissions_kt_by_country</th>
+      <th>Renewables (% equivalent primary energy)</th>
+      <th>gdp_growth</th>
+      <th>gdp_per_capita</th>
+      <th>Density\n(P/Km2)</th>
+      <th>Land Area(Km2)</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>Afghanistan</td>
+      <td>Crop Residues</td>
+      <td>Direct emissions (N2O)</td>
+      <td>2000</td>
+      <td>5.200000e-01</td>
+      <td>1.613591</td>
+      <td>6.2</td>
+      <td>9.22</td>
+      <td>20000.0</td>
+      <td>44.990002</td>
+      <td>...</td>
+      <td>302.594818</td>
+      <td>1.64</td>
+      <td>760.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>60.0</td>
+      <td>652230.0</td>
+      <td>33.93911</td>
+      <td>67.709953</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>Afghanistan</td>
+      <td>Crop Residues</td>
+      <td>Indirect emissions (N2O)</td>
+      <td>2000</td>
+      <td>1.170000e-01</td>
+      <td>1.613591</td>
+      <td>6.2</td>
+      <td>9.22</td>
+      <td>20000.0</td>
+      <td>44.990002</td>
+      <td>...</td>
+      <td>302.594818</td>
+      <td>1.64</td>
+      <td>760.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>60.0</td>
+      <td>652230.0</td>
+      <td>33.93911</td>
+      <td>67.709953</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Afghanistan</td>
+      <td>Crop Residues</td>
+      <td>Emissions (N2O)</td>
+      <td>2000</td>
+      <td>6.370000e-01</td>
+      <td>1.613591</td>
+      <td>6.2</td>
+      <td>9.22</td>
+      <td>20000.0</td>
+      <td>44.990002</td>
+      <td>...</td>
+      <td>302.594818</td>
+      <td>1.64</td>
+      <td>760.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>60.0</td>
+      <td>652230.0</td>
+      <td>33.93911</td>
+      <td>67.709953</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Afghanistan</td>
+      <td>Crop Residues</td>
+      <td>Emissions (CO2eq) from N2O (AR5)</td>
+      <td>2000</td>
+      <td>1.688070e+02</td>
+      <td>1.613591</td>
+      <td>6.2</td>
+      <td>9.22</td>
+      <td>20000.0</td>
+      <td>44.990002</td>
+      <td>...</td>
+      <td>302.594818</td>
+      <td>1.64</td>
+      <td>760.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>60.0</td>
+      <td>652230.0</td>
+      <td>33.93911</td>
+      <td>67.709953</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Afghanistan</td>
+      <td>Crop Residues</td>
+      <td>Emissions (CO2eq) (AR5)</td>
+      <td>2000</td>
+      <td>1.688070e+02</td>
+      <td>1.613591</td>
+      <td>6.2</td>
+      <td>9.22</td>
+      <td>20000.0</td>
+      <td>44.990002</td>
+      <td>...</td>
+      <td>302.594818</td>
+      <td>1.64</td>
+      <td>760.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>60.0</td>
+      <td>652230.0</td>
+      <td>33.93911</td>
+      <td>67.709953</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>1234060</th>
+      <td>OECD</td>
+      <td>All sectors without LULUCF</td>
+      <td>Emissions (CO2)</td>
+      <td>2020</td>
+      <td>1.088919e+07</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1234061</th>
+      <td>OECD</td>
+      <td>All sectors without LULUCF</td>
+      <td>Emissions (CO2eq) from F-gases (AR5)</td>
+      <td>2020</td>
+      <td>9.208261e+05</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1234062</th>
+      <td>OECD</td>
+      <td>All sectors without LULUCF</td>
+      <td>Emissions (CO2eq) from CH4 (AR5)</td>
+      <td>2020</td>
+      <td>1.825476e+06</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1234063</th>
+      <td>OECD</td>
+      <td>All sectors without LULUCF</td>
+      <td>Emissions (CO2eq) from N2O (AR5)</td>
+      <td>2020</td>
+      <td>8.009744e+05</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+    <tr>
+      <th>1234064</th>
+      <td>OECD</td>
+      <td>All sectors without LULUCF</td>
+      <td>Emissions (CO2eq) (AR5)</td>
+      <td>2020</td>
+      <td>1.443647e+07</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>...</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+    </tr>
+  </tbody>
+</table>
+<p>1234065 rows × 23 columns</p>
+</div></div></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
