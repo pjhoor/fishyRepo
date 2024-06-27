@@ -19,8 +19,11 @@ if __name__ == '__main__':
         # Retrieve existing cell tags.
         cell_tags = cell.get('metadata', {}).get('tags', [])
 
-        if 'remove_input' not in cell_tags:
-            cell_tags.append('remove_input')
+        if 'remove_input' in cell_tags:
+            cell_tags.remove('remove_input')
+        
+        if 'hide-input' not in cell_tags:
+            cell_tags.append('hide_input')
 
         cell['metadata']['tags'] = cell_tags
 
