@@ -1,4 +1,5 @@
 /docs/_build/
 /.idea/
 /graphs/merged_to_csv.csv/
+/.DS_Store/
 
