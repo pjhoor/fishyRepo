@@ -1,0 +1,116 @@
+Traceback (most recent call last):
+  File "/home/jaimie/miniconda3/envs/jupyterbook/lib/python3.10/site-packages/jupyter_cache/executors/utils.py", line 58, in single_nb_execution
+    executenb(
+  File "/home/jaimie/miniconda3/envs/jupyterbook/lib/python3.10/site-packages/nbclient/client.py", line 1314, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/home/jaimie/.local/lib/python3.10/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+  File "/home/jaimie/miniconda3/envs/jupyterbook/lib/python3.10/asyncio/base_events.py", line 649, in run_until_complete
+    return future.result()
+  File "/home/jaimie/miniconda3/envs/jupyterbook/lib/python3.10/site-packages/nbclient/client.py", line 709, in async_execute
+    await self.async_execute_cell(
+  File "/home/jaimie/miniconda3/envs/jupyterbook/lib/python3.10/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/jaimie/miniconda3/envs/jupyterbook/lib/python3.10/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+# Imports
+import pandas as pd
+import matplotlib.patches as mpatches
+import matplotlib.pyplot as plt
+import matplotlib.colors as mcolors
+import numpy as np
+import seaborn as sns
+import geopandas as gpd
+
+merge = pd.read_csv('../graphs/graphA/merge.csv', usecols=['Area','2020','2020/area','2020/pop'])
+gdf = gpd.read_file('../graphs/graphC/shapes/ne_110m_admin_0_countries.shp')
+
+
+def plot_emissions_by_country(data, country_col, emission_col, graph_title, unit):
+
+    # Load the world dataset
+    world = gdf
+    # Remove Antarctica and Seven seas (open ocean) from the dataset
+    world = world.loc[~world["ADMIN"].isin(["Antarctica", "Seven seas (open ocean)"])]
+    
+    # Fix the name of the United States in the world dataset
+    data['Area'] = data['Area'].replace('United States', 'United States of America')
+
+    # Initialize a final empty figure
+    fig, ax = plt.subplots(figsize=(20, 10))
+    
+    # Start by plotting a map of the world
+    world.boundary.plot(ax=ax, color="black", linewidth=0.5)
+    
+    # Categorize emission values into quartiles
+    data[emission_col + '_quartile'] = pd.qcut(data[emission_col], 4, labels=False)
+    
+    # Calculate min and max values for each quartile
+    quartile_ranges = data.groupby(emission_col + '_quartile')[emission_col].agg(['min', 'max'])
+    
+    # Original list of colors
+    colors = ['lightgreen', 'yellow', 'orange', 'red']
+
+    # Function to reduce saturation by 50%
+    def reduce_saturation(color):
+        # Convert color name to RGB
+        rgb = mcolors.to_rgb(color)
+        # Convert RGB to HSV
+        hsv = mcolors.rgb_to_hsv(rgb)
+        # Reduce saturation by 50%
+        hsv[1] *= 0.5
+        # Convert back to RGB
+        return mcolors.hsv_to_rgb(hsv)
+
+    # Apply the function to each color in the list
+    colors = [reduce_saturation(color) for color in colors]
+    
+    # Modify the plotting loop to use quartile information
+    for country_name in world["ADMIN"].unique():
+        country = world[world["ADMIN"] == country_name]
+        if country_name in data[country_col].values:
+            rel_value = data[data[country_col] == country_name][emission_col + '_quartile'].values[0]
+            color = colors[rel_value]
+        else:
+            color = 'white'
+        country.plot(ax=ax, color=color, alpha=1)
+    
+    # Turn off axis ticks
+    ax.set_xticks([])
+    ax.set_yticks([])
+    
+    # Change the background color to light blue
+    ax.set_facecolor((0.404, 0.82, 0.902))
+
+    # Set the plot title and subtitle
+    plt.title(graph_title)
+
+    # Define new labels for the quartiles
+    quartile_labels = ["very low", "low", "medium", "high"]
+
+    # Create custom legend for the quartiles and missing countries
+    legend_labels = [f'{quartile_labels[i]} ({quartile_ranges.iloc[i]["min"]:.2f} to {quartile_ranges.iloc[i]["max"]:.2f} {unit})' for i in range(4)]
+    legend_patches = [mpatches.Patch(facecolor=colors[i], edgecolor='black', label=legend_labels[i]) for i in range(4)]
+    
+    # Add the custom patch for countries missing in the dataset
+    patch_missing = mpatches.Patch(facecolor=(1, 1, 1), edgecolor='black', label='Country missing in dataset')
+    legend_patches.append(patch_missing)
+    plt.legend(handles=legend_patches, loc='lower left')
+    
+    plt.show()
+------------------
+
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
+Cell [0;32mIn[5], line 8[0m
+[1;32m      6[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnp[39;00m
+[1;32m      7[0m [38;5;28;01mimport[39;00m [38;5;21;01mseaborn[39;00m [38;5;28;01mas[39;00m [38;5;21;01msns[39;00m
+[0;32m----> 8[0m [38;5;28;01mimport[39;00m [38;5;21;01mgeopandas[39;00m [38;5;28;01mas[39;00m [38;5;21;01mgpd[39;00m
+[1;32m     10[0m merge [38;5;241m=[39m pd[38;5;241m.[39mread_csv([38;5;124m'[39m[38;5;124m../graphs/graphA/merge.csv[39m[38;5;124m'[39m, usecols[38;5;241m=[39m[[38;5;124m'[39m[38;5;124mArea[39m[38;5;124m'[39m,[38;5;124m'[39m[38;5;124m2020[39m[38;5;124m'[39m,[38;5;124m'[39m[38;5;124m2020/area[39m[38;5;124m'[39m,[38;5;124m'[39m[38;5;124m2020/pop[39m[38;5;124m'[39m])
+[1;32m     11[0m gdf [38;5;241m=[39m gpd[38;5;241m.[39mread_file([38;5;124m'[39m[38;5;124m../graphs/graphC/shapes/ne_110m_admin_0_countries.shp[39m[38;5;124m'[39m)
+
+[0;31mModuleNotFoundError[0m: No module named 'geopandas'
+
