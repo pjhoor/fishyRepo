@@ -11,5 +11,5 @@ he was also in charge of handling all GitHub related issues and the general stru
 #### Jaimie Lauppe
 Jaimie was mainly responsible for writing the introduction, the datasets and variables, reflection and work distribution. She also created the stacked bar charts of the electricity sources and elaborated on the first perspective using these visualizations.
 
-#### Cristy Russel
+#### Cristy Russell
 Cristy was mainly responsible for creating the remaining graphs and elaborating on the perspectives by writing the corresponding arguments. She also contributed to the variables in the dataset section and introduced the story with a graph of the world wide emissions shown in a line plot.
