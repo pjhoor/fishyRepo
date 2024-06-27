@@ -15,102 +15,154 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-# Imports
-import pandas as pd
-import matplotlib.patches as mpatches
-import matplotlib.pyplot as plt
-import matplotlib.colors as mcolors
-import numpy as np
-import seaborn as sns
-import geopandas as gpd
+developed_countries = [
+    "Australia",
+    "Austria",
+    "Belgium",
+    "Canada",
+    "Denmark",
+    "Finland",
+    "France",
+    "Germany",
+    "Iceland",
+    "Ireland",
+    "Israel",
+    "Italy",
+    "Japan",
+    "Luxembourg",
+    "Netherlands",
+    "New Zealand",
+    "Norway",
+    "Portugal",
+    "Singapore",
+    "South Korea",
+    "Spain",
+    "Sweden",
+    "Switzerland",
+    "United Kingdom",
+    "United States",
+    "Andorra",
+    "Cyprus",
+    "Czech Republic",
+    "Estonia",
+    "Greece",
+    "Hong Kong SAR",
+    "Latvia",
+    "Lithuania",
+    "Malta",
+    "Monaco",
+    "San Marino",
+    "Slovakia",
+    "Slovenia"
+]
 
-merge = pd.read_csv('../graphs/graphA/merge.csv', usecols=['Area','2020','2020/area','2020/pop'])
-gdf = gpd.read_file('../graphs/graphC/shapes/ne_110m_admin_0_countries.shp')
+df = pd.read_parquet("../graphs/small_merge.parquet")
+countries = pd.read_csv("../datasets/sus.csv")["Entity"].drop_duplicates()
+world_data = df[(df['Element'] == "Emissions (CO2)") & (df['Item'] == "All sectors without LULUCF") & (df['Area'].isin(countries))].drop(columns=[
+    'Item', 'Access to electricity (% of population)',
+    'Access to clean fuels for cooking',
+    'Renewable-electricity-generating-capacity-per-capita',
+    'Financial flows to developing countries (US $)',
+    'Electricity from fossil fuels (TWh)', 'Electricity from nuclear (TWh)',
+    'Low-carbon electricity (% electricity)',
+    'Primary energy consumption per capita (kWh/person)',
+    'Energy intensity level of primary energy (MJ/$2017 PPP GDP)',
+    'Value_co2_emissions_kt_by_country',
+    'Renewables (% equivalent primary energy)', 'gdp_growth',
+    'gdp_per_capita', 'Density\\n(P/Km2)', 'Land Area(Km2)', 'Latitude',
+    'Longitude']).dropna()
+means = pd.concat([world_data['Renewable energy share in the total final energy consumption (%)'].groupby(world_data['Year']).mean(), world_data['Emission'].groupby(world_data['Year']).sum()], axis=1)
 
+import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 
-def plot_emissions_by_country(data, country_col, emission_col, graph_title, unit):
+# Create figure with secondary y-axis
+fig = make_subplots(specs=[[{"secondary_y": True}]])
 
-    # Load the world dataset
-    world = gdf
-    # Remove Antarctica and Seven seas (open ocean) from the dataset
-    world = world.loc[~world["ADMIN"].isin(["Antarctica", "Seven seas (open ocean)"])]
-    
-    # Fix the name of the United States in the world dataset
-    data['Area'] = data['Area'].replace('United States', 'United States of America')
+# Add traces
+fig.add_trace(
+    go.Scatter(x=means.index, y=means['Emission'], name="Emissions"),
+    secondary_y=False,
+)
 
-    # Initialize a final empty figure
-    fig, ax = plt.subplots(figsize=(20, 10))
-    
-    # Start by plotting a map of the world
-    world.boundary.plot(ax=ax, color="black", linewidth=0.5)
-    
-    # Categorize emission values into quartiles
-    data[emission_col + '_quartile'] = pd.qcut(data[emission_col], 4, labels=False)
-    
-    # Calculate min and max values for each quartile
-    quartile_ranges = data.groupby(emission_col + '_quartile')[emission_col].agg(['min', 'max'])
-    
-    # Original list of colors
-    colors = ['lightgreen', 'yellow', 'orange', 'red']
+fig.add_trace(
+    go.Scatter(x=means.index, y=means['Renewable energy share in the total final energy consumption (%)'], name="Renewable energy share (%)"),
+    secondary_y=True,
+)
 
-    # Function to reduce saturation by 50%
-    def reduce_saturation(color):
-        # Convert color name to RGB
-        rgb = mcolors.to_rgb(color)
-        # Convert RGB to HSV
-        hsv = mcolors.rgb_to_hsv(rgb)
-        # Reduce saturation by 50%
-        hsv[1] *= 0.5
-        # Convert back to RGB
-        return mcolors.hsv_to_rgb(hsv)
+# Add figure title
+fig.update_layout(
+    title_text="World average"
+)
 
-    # Apply the function to each color in the list
-    colors = [reduce_saturation(color) for color in colors]
-    
-    # Modify the plotting loop to use quartile information
-    for country_name in world["ADMIN"].unique():
-        country = world[world["ADMIN"] == country_name]
-        if country_name in data[country_col].values:
-            rel_value = data[data[country_col] == country_name][emission_col + '_quartile'].values[0]
-            color = colors[rel_value]
-        else:
-            color = 'white'
-        country.plot(ax=ax, color=color, alpha=1)
-    
-    # Turn off axis ticks
-    ax.set_xticks([])
-    ax.set_yticks([])
-    
-    # Change the background color to light blue
-    ax.set_facecolor((0.404, 0.82, 0.902))
+# Set x-axis title
+fig.update_xaxes(title_text="Year")
 
-    # Set the plot title and subtitle
-    plt.title(graph_title)
+# Set y-axes titles
+fig.update_yaxes(title_text="<b>Emissions</b>", secondary_y=False)
+fig.update_yaxes(title_text="<b>Renewable energy share (%)</b>", secondary_y=True)
 
-    # Define new labels for the quartiles
-    quartile_labels = ["very low", "low", "medium", "high"]
+fig.show()
 
-    # Create custom legend for the quartiles and missing countries
-    legend_labels = [f'{quartile_labels[i]} ({quartile_ranges.iloc[i]["min"]:.2f} to {quartile_ranges.iloc[i]["max"]:.2f} {unit})' for i in range(4)]
-    legend_patches = [mpatches.Patch(facecolor=colors[i], edgecolor='black', label=legend_labels[i]) for i in range(4)]
-    
-    # Add the custom patch for countries missing in the dataset
-    patch_missing = mpatches.Patch(facecolor=(1, 1, 1), edgecolor='black', label='Country missing in dataset')
-    legend_patches.append(patch_missing)
-    plt.legend(handles=legend_patches, loc='lower left')
-    
-    plt.show()
 ------------------
 
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mModuleNotFoundError[0m                       Traceback (most recent call last)
-Cell [0;32mIn[5], line 8[0m
-[1;32m      6[0m [38;5;28;01mimport[39;00m [38;5;21;01mnumpy[39;00m [38;5;28;01mas[39;00m [38;5;21;01mnp[39;00m
-[1;32m      7[0m [38;5;28;01mimport[39;00m [38;5;21;01mseaborn[39;00m [38;5;28;01mas[39;00m [38;5;21;01msns[39;00m
-[0;32m----> 8[0m [38;5;28;01mimport[39;00m [38;5;21;01mgeopandas[39;00m [38;5;28;01mas[39;00m [38;5;21;01mgpd[39;00m
-[1;32m     10[0m merge [38;5;241m=[39m pd[38;5;241m.[39mread_csv([38;5;124m'[39m[38;5;124m../graphs/graphA/merge.csv[39m[38;5;124m'[39m, usecols[38;5;241m=[39m[[38;5;124m'[39m[38;5;124mArea[39m[38;5;124m'[39m,[38;5;124m'[39m[38;5;124m2020[39m[38;5;124m'[39m,[38;5;124m'[39m[38;5;124m2020/area[39m[38;5;124m'[39m,[38;5;124m'[39m[38;5;124m2020/pop[39m[38;5;124m'[39m])
-[1;32m     11[0m gdf [38;5;241m=[39m gpd[38;5;241m.[39mread_file([38;5;124m'[39m[38;5;124m../graphs/graphC/shapes/ne_110m_admin_0_countries.shp[39m[38;5;124m'[39m)
+[0;31mImportError[0m                               Traceback (most recent call last)
+Cell [0;32mIn[9], line 42[0m
+[1;32m      1[0m developed_countries [38;5;241m=[39m [
+[1;32m      2[0m     [38;5;124m"[39m[38;5;124mAustralia[39m[38;5;124m"[39m,
+[1;32m      3[0m     [38;5;124m"[39m[38;5;124mAustria[39m[38;5;124m"[39m,
+[0;32m   (...)[0m
+[1;32m     39[0m     [38;5;124m"[39m[38;5;124mSlovenia[39m[38;5;124m"[39m
+[1;32m     40[0m ]
+[0;32m---> 42[0m df [38;5;241m=[39m [43mpd[49m[38;5;241;43m.[39;49m[43mread_parquet[49m[43m([49m[38;5;124;43m"[39;49m[38;5;124;43m../graphs/small_merge.parquet[39;49m[38;5;124;43m"[39;49m[43m)[49m
+[1;32m     43[0m countries [38;5;241m=[39m pd[38;5;241m.[39mread_csv([38;5;124m"[39m[38;5;124m../datasets/sus.csv[39m[38;5;124m"[39m)[[38;5;124m"[39m[38;5;124mEntity[39m[38;5;124m"[39m][38;5;241m.[39mdrop_duplicates()
+[1;32m     44[0m world_data [38;5;241m=[39m df[(df[[38;5;124m'[39m[38;5;124mElement[39m[38;5;124m'[39m] [38;5;241m==[39m [38;5;124m"[39m[38;5;124mEmissions (CO2)[39m[38;5;124m"[39m) [38;5;241m&[39m (df[[38;5;124m'[39m[38;5;124mItem[39m[38;5;124m'[39m] [38;5;241m==[39m [38;5;124m"[39m[38;5;124mAll sectors without LULUCF[39m[38;5;124m"[39m) [38;5;241m&[39m (df[[38;5;124m'[39m[38;5;124mArea[39m[38;5;124m'[39m][38;5;241m.[39misin(countries))][38;5;241m.[39mdrop(columns[38;5;241m=[39m[
+[1;32m     45[0m     [38;5;124m'[39m[38;5;124mItem[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mAccess to electricity ([39m[38;5;132;01m% o[39;00m[38;5;124mf population)[39m[38;5;124m'[39m,
+[1;32m     46[0m     [38;5;124m'[39m[38;5;124mAccess to clean fuels for cooking[39m[38;5;124m'[39m,
+[0;32m   (...)[0m
+[1;32m     55[0m     [38;5;124m'[39m[38;5;124mgdp_per_capita[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mDensity[39m[38;5;130;01m\\[39;00m[38;5;124mn(P/Km2)[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mLand Area(Km2)[39m[38;5;124m'[39m, [38;5;124m'[39m[38;5;124mLatitude[39m[38;5;124m'[39m,
+[1;32m     56[0m     [38;5;124m'[39m[38;5;124mLongitude[39m[38;5;124m'[39m])[38;5;241m.[39mdropna()
 
-[0;31mModuleNotFoundError[0m: No module named 'geopandas'
+File [0;32m~/miniconda3/envs/jupyterbook/lib/python3.10/site-packages/pandas/io/parquet.py:651[0m, in [0;36mread_parquet[0;34m(path, engine, columns, storage_options, use_nullable_dtypes, dtype_backend, filesystem, filters, **kwargs)[0m
+[1;32m    498[0m [38;5;129m@doc[39m(storage_options[38;5;241m=[39m_shared_docs[[38;5;124m"[39m[38;5;124mstorage_options[39m[38;5;124m"[39m])
+[1;32m    499[0m [38;5;28;01mdef[39;00m [38;5;21mread_parquet[39m(
+[1;32m    500[0m     path: FilePath [38;5;241m|[39m ReadBuffer[[38;5;28mbytes[39m],
+[0;32m   (...)[0m
+[1;32m    508[0m     [38;5;241m*[39m[38;5;241m*[39mkwargs,
+[1;32m    509[0m ) [38;5;241m-[39m[38;5;241m>[39m DataFrame:
+[1;32m    510[0m [38;5;250m    [39m[38;5;124;03m"""[39;00m
+[1;32m    511[0m [38;5;124;03m    Load a parquet object from the file path, returning a DataFrame.[39;00m
+[1;32m    512[0m 
+[0;32m   (...)[0m
+[1;32m    648[0m [38;5;124;03m    1    4    9[39;00m
+[1;32m    649[0m [38;5;124;03m    """[39;00m
+[0;32m--> 651[0m     impl [38;5;241m=[39m [43mget_engine[49m[43m([49m[43mengine[49m[43m)[49m
+[1;32m    653[0m     [38;5;28;01mif[39;00m use_nullable_dtypes [38;5;129;01mis[39;00m [38;5;129;01mnot[39;00m lib[38;5;241m.[39mno_default:
+[1;32m    654[0m         msg [38;5;241m=[39m (
+[1;32m    655[0m             [38;5;124m"[39m[38;5;124mThe argument [39m[38;5;124m'[39m[38;5;124muse_nullable_dtypes[39m[38;5;124m'[39m[38;5;124m is deprecated and will be removed [39m[38;5;124m"[39m
+[1;32m    656[0m             [38;5;124m"[39m[38;5;124min a future version.[39m[38;5;124m"[39m
+[1;32m    657[0m         )
+
+File [0;32m~/miniconda3/envs/jupyterbook/lib/python3.10/site-packages/pandas/io/parquet.py:67[0m, in [0;36mget_engine[0;34m(engine)[0m
+[1;32m     64[0m         [38;5;28;01mexcept[39;00m [38;5;167;01mImportError[39;00m [38;5;28;01mas[39;00m err:
+[1;32m     65[0m             error_msgs [38;5;241m+[39m[38;5;241m=[39m [38;5;124m"[39m[38;5;130;01m\n[39;00m[38;5;124m - [39m[38;5;124m"[39m [38;5;241m+[39m [38;5;28mstr[39m(err)
+[0;32m---> 67[0m     [38;5;28;01mraise[39;00m [38;5;167;01mImportError[39;00m(
+[1;32m     68[0m         [38;5;124m"[39m[38;5;124mUnable to find a usable engine; [39m[38;5;124m"[39m
+[1;32m     69[0m         [38;5;124m"[39m[38;5;124mtried using: [39m[38;5;124m'[39m[38;5;124mpyarrow[39m[38;5;124m'[39m[38;5;124m, [39m[38;5;124m'[39m[38;5;124mfastparquet[39m[38;5;124m'[39m[38;5;124m.[39m[38;5;130;01m\n[39;00m[38;5;124m"[39m
+[1;32m     70[0m         [38;5;124m"[39m[38;5;124mA suitable version of [39m[38;5;124m"[39m
+[1;32m     71[0m         [38;5;124m"[39m[38;5;124mpyarrow or fastparquet is required for parquet [39m[38;5;124m"[39m
+[1;32m     72[0m         [38;5;124m"[39m[38;5;124msupport.[39m[38;5;130;01m\n[39;00m[38;5;124m"[39m
+[1;32m     73[0m         [38;5;124m"[39m[38;5;124mTrying to import the above resulted in these errors:[39m[38;5;124m"[39m
+[1;32m     74[0m         [38;5;124mf[39m[38;5;124m"[39m[38;5;132;01m{[39;00merror_msgs[38;5;132;01m}[39;00m[38;5;124m"[39m
+[1;32m     75[0m     )
+[1;32m     77[0m [38;5;28;01mif[39;00m engine [38;5;241m==[39m [38;5;124m"[39m[38;5;124mpyarrow[39m[38;5;124m"[39m:
+[1;32m     78[0m     [38;5;28;01mreturn[39;00m PyArrowImpl()
+
+[0;31mImportError[0m: Unable to find a usable engine; tried using: 'pyarrow', 'fastparquet'.
+A suitable version of pyarrow or fastparquet is required for parquet support.
+Trying to import the above resulted in these errors:
+ - Missing optional dependency 'pyarrow'. pyarrow is required for parquet support. Use pip or conda to install pyarrow.
+ - Missing optional dependency 'fastparquet'. fastparquet is required for parquet support. Use pip or conda to install fastparquet.
 
