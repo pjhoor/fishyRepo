@@ -4,7 +4,7 @@
 title: Emissions related to sustainable energy per country (from 2000-2020) # Change this to your book title.
 author: InfoVis Group L6 # Change this to your name (or your team/organization name).
 copyright: "2024"
-logo: static/images/logo.png
+logo: ../static/images/logo.png
 
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
@@ -25,7 +25,7 @@ repository:
 # Add GitHub buttons to your book
 # See https://jupyterbook.org/customize/config.html#add-a-link-to-your-repository
 html:
-  favicon: static/images/favicon2.ico
+  favicon: ../static/images/favicon2.ico
   use_repository_button: true
 
 sphinx:
@@ -35,7 +35,7 @@ sphinx:
   config:
     html_context:
       default_mode: "light"
-    html_static_path: "static"
+    html_static_path: "../static"
     html_css_files:
       - "css/theme.css"
     html_js_files:

@@ -1,0 +1,10 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: introduction.md
+chapters:
+- file: data_preprocessing.ipynb
+- file: story.ipynb
+- file: reflection.ipynb
+- file: work_distribution.ipynb
