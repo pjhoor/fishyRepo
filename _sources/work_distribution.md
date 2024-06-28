@@ -9,7 +9,7 @@ Pepijn was mainly responsible for the graphs showing the entire world in colour 
 he was also in charge of handling all GitHub related issues and the general structure of the notebook. He also wrote the data preprocessing part.
 
 #### Jaimie Lauppe
-Jaimie was mainly responsible for writing the introduction, the datasets and variables, reflection, work distribution and . She also created the stacked bar charts of the electricity sources and elaborated on the first perspective using these visualizations. 
+Jaimie was mainly responsible for writing the introduction, the datasets and variables, reflection, work distribution and made the datastory come together. She also wrote the datastory part about electricity generated and created the stacked bar chart visualizations of the electricity sources.
 
 #### Cristy Russell
 Cristy was mainly responsible for creating the remaining graphs and elaborating on the perspectives by writing the corresponding arguments. She also contributed to the variables in the dataset section and introduced the story with a graph of the world wide emissions shown in a line plot.
