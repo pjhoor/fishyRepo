@@ -80,3 +80,56 @@ code.literal {
     height: 100%;
   }
 }
+
+.scrollable-container {
+  max-width: 100%; /* Adjust based on your layout needs */
+  overflow-x: auto; /* Enables horizontal scrolling */
+  border: 2px solid #ccc; /* Optional: adds a border around the container */
+}
+#map-switcher {
+  position: relative;
+  width: 100%; /* Adjust as needed */
+  height: 400px; /* Adjust as needed */
+}
+.map-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  width: 100%; /* Adjust based on your layout needs */
+  height: 100%;
+  max-width: 1000px;
+  max-height: 500px;
+  overflow: hidden; /* Enables horizontal scrolling */
+  display: none;
+}
+.map-container img {
+  width: 100%; /* Make the image fill the container width */
+  height: 100%; /* Make the image fill the container height */
+  object-fit: contain; /* Ensures the image's aspect ratio is preserved */
+}
+/* Show the first map by default */
+.map-container:first-child {
+  display: flex;
+}
+button {
+  position: relative;
+  z-index: 2; /* Ensures buttons are above the map containers */
+  border: 2px solid #20AF24; /* Dark green border */
+  background-color: #48C353; /* Green background */
+  color: white; /* White text color for better contrast */
+  padding: 10px 20px; /* Adjust padding to your liking */
+  border-radius: 16px; /* Rounded corners */
+  cursor: pointer; /* Changes cursor to pointer on hover */
+  font-size: 16px; /* Adjust font size as needed */
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition for hover effect */
+}
+button:hover {
+  background-color: #79E381; /* Lighter green on hover for visual feedback */
+  color: black; /* Change text color on hover for better contrast */
+}
+.buttons-container {
+  display: flex;
+  justify-content: space-between;
+}
