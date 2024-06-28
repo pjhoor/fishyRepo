@@ -22,3 +22,6 @@ In short, this data story will explore the correlation between emissions and sus
 - Pepijn ten Hoor
 - Jaimie Lauppe
 - Cristy Russell
+
+# External links
+- [GitHub repository](https://github.com/pjhoor/fishyRepo)
