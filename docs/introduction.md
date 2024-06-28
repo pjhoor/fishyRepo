@@ -7,12 +7,12 @@ This data story will explore whether or not sustainable energy has a positive ef
 
 Global warming has been a big problem for the whole world, but we have two different perspectives on whether or not sustainable energy is the best solution.
 
-On one hand, sustainable energy is important to lower emissions and fight climate change. The different kinds of sustainable energy per country affect the emissions in that country so that there are less emissions. It wins back renewable energy in a sustainable way so that there is less need to obtain energy causing bad emissions. So there will be a positive correlation between sustainable energy and lessening the emissions per country.
+On one hand, sustainable energy is important to lower emissions and fight climate change. The different kinds of sustainable energy per country have a positive impact on the emissions (less emissions) of that country. It wins back renewable energy in a sustainable way so that there is less need to generate energy with non-renewable ways causing bad emissions. Sustainable energy could be a great solution to global warming.
 
-However, although global warming is indeed a big problem in the world, sustainable energy might not be the solution. The sustainable energy per country can not keep up with the amount of emissions per country to have a positive effect. There will not be a clear positive correlation between sustainable energy and fewer emissions per country.
+On the other hand, while global warming is indeed a big problem in the world, sustainable energy might not be the solution. The sustainable energy per country can not keep up with the amount of emissions per country to have a positive effect. In other words, sustainable energy might not be the solution to global warming.
 
 
-In short, this data story will explore the correlation between emissions and sustainable energy per country.
+In short, this data story will explore the correlation between emissions and sustainable energy per country. To discover if sustainable energy really is the best solution to global warming.
 
 
 [Click here to read the data story](story.ipynb)
