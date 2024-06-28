@@ -378,7 +378,7 @@ document.write(`
 <ul class="simple">
 <li><p>The dataset about sustainable energy and other data per country during 2000-2020 can be downloaded <a class="reference external" href="https://www.kaggle.com/datasets/anshtanwar/global-data-on-sustainable-energy/data">here</a>.</p></li>
 </ul>
-<p>Lastly, we started using a third dataset halfway through the project. This dataset contains the population of all countries for the years 1970, 1980, 1990, 2000, 2010, 2015, 2020 and 2022. It also contains information like the rankings of the countries based on most population and country codes. &lt;more info&gt; This dataset provided the ability to visualize the emmissions per country per capita. It contains 234 records and 17 variables.</p>
+<p>Lastly, we started using a third dataset halfway through the project. This dataset contains the population of all countries for the years 1970, 1980, 1990, 2000, 2010, 2015, 2020 and 2022. This dataset provided the ability to visualize the emmissions per capita in all countries. It contains 234 records and 17 variables.</p>
 <ul class="simple">
 <li><p>The dataset about world population per country during 2000-2022 can be downloaded <a class="reference external" href="https://www.kaggle.com/datasets/iamsouravbanerjee/world-population-dataset">here</a></p></li>
 </ul>
@@ -387,7 +387,7 @@ document.write(`
 <h2>Preprocessing<a class="headerlink" href="#preprocessing" title="Link to this heading">#</a></h2>
 <p>First of all, for the first two bar charts, we needed the total amount of CO2 emitted per country, for all years. To get this, we filtered our dataset “Total Emissions Per Country (2000-2020)” to only keep the relevant data. We specifically selected the CO2 emissions only, and we had to choose between the values: ‘All sectors without LULUCF’ and ‘All sectors with LULUCF’. LULUCF stands for Land-Use Change and Forestry which includes the emissions that are released when cutting down forests, but also the emissions that are absorbed when planting forests. Which means that this LULUCF value can be negative. Eventually we settled on the data without LULUCF, because otherwise some countries would have negative CO2 emissions, which would be confusing to visualize.
 After that, we combined this data with the total surface area of each country from our “Global Data on Sustainable Energy (2000-2020)” dataset. Then we made new columns for each year, containing the relative emissions, which are the emissions divided by the country surface area (kilotonnes CO2/km^2).</p>
-<p>For our world heat map, we needed to normalize these relative emissions to turn them into values from 0 to 1, so we used these normalized values to assign colors from green to yellow to red to each country in our heat map.</p>
+<p>For our world heat map, we needed to normalize these relative emissions to turn them into values from 0 to 1, we then used these normalized values to assign colors from green to yellow to red to each country in our heat map.</p>
 </section>
 <section id="variable-descriptions">
 <h2>Variable descriptions<a class="headerlink" href="#variable-descriptions" title="Link to this heading">#</a></h2>
@@ -396,7 +396,7 @@ After that, we combined this data with the total surface area of each country fr
 <ul class="simple">
 <li><p>Discrete / Categorical variables: <code class="docutils literal notranslate"><span class="pre">Element</span></code>, <code class="docutils literal notranslate"><span class="pre">Area</span></code>, <code class="docutils literal notranslate"><span class="pre">Item</span></code>, <code class="docutils literal notranslate"><span class="pre">Entity</span></code></p></li>
 <li><p>Discrete / Interval variables: <code class="docutils literal notranslate"><span class="pre">Year</span></code></p></li>
-<li><p>Continuous / Ratio variables: <code class="docutils literal notranslate"><span class="pre">20xx</span></code>(years 2000-2020), <code class="docutils literal notranslate"><span class="pre">Electricity</span> <span class="pre">from</span> <span class="pre">fossil</span> <span class="pre">fuels</span> <span class="pre">(TWh)</span></code>, <code class="docutils literal notranslate"><span class="pre">Electricity</span> <span class="pre">from</span> <span class="pre">nuclear</span> <span class="pre">(TWh)</span></code>, <code class="docutils literal notranslate"><span class="pre">Electricity</span> <span class="pre">from</span> <span class="pre">renewables</span> <span class="pre">(TWh)</span></code>,
+<li><p>Continuous / Ratio variables: <code class="docutils literal notranslate"><span class="pre">20xx</span></code> (years 2000-2020), <code class="docutils literal notranslate"><span class="pre">Electricity</span> <span class="pre">from</span> <span class="pre">fossil</span> <span class="pre">fuels</span> <span class="pre">(TWh)</span></code>, <code class="docutils literal notranslate"><span class="pre">Electricity</span> <span class="pre">from</span> <span class="pre">nuclear</span> <span class="pre">(TWh)</span></code>, <code class="docutils literal notranslate"><span class="pre">Electricity</span> <span class="pre">from</span> <span class="pre">renewables</span> <span class="pre">(TWh)</span></code>,
 <code class="docutils literal notranslate"><span class="pre">Land</span> <span class="pre">Area</span> <span class="pre">(Km2)</span></code></p></li>
 </ul>
 </section>
@@ -417,6 +417,11 @@ After that, we combined this data with the total surface area of each country fr
 <li><p><code class="docutils literal notranslate"><span class="pre">Electricity</span> <span class="pre">from</span> <span class="pre">nuclear</span> <span class="pre">(TWh)</span></code> is the total electricity in TWh obtained from nuclear sources from a country.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Electricity</span> <span class="pre">from</span> <span class="pre">renewables</span> <span class="pre">(TWh)</span></code> is the total electricity in TWh obtained from renewable sources from a country.</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Land</span> <span class="pre">Area</span> <span class="pre">(Km2)</span></code> means the total area of the country or region in km², which we can use to fairly compare the sustainable energy between countries.</p></li>
+</ul>
+<p>The variables we used from the third dataset (World Population Dataset) were:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Country/Territory</span></code> the name of the country.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">19xx/20xx</span> <span class="pre">Population</span></code> (the population per country in the years 1970, 1980, 1990, 2000, 2010, 2015, 2020, 2022).</p></li>
 </ul>
 </section>
 </section>
